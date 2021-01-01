@@ -7,17 +7,18 @@
 * [What is a memory map?](docs/memory_map.md) (1 minute read)
 * [What is program counter?](docs/program_counter.md) (1 minute read)
 * [What is an interrupt?](docs/interrupt.md) (1 minute read)
-* How does a programmer control the peripherals (2 min read)?
+* [How does a programmer control the peripherals](docs/peripherals.md) (2 min read)?
 * What is privileged execution (2 min read)?
 
 ## TODO:
 
+* Place for questions
+* GPU
 * Quiz
 * Device Tree
 * File System
 * PY-UIO
 * E-mail system
-* GPU
 
 ### Why do we use the Beaglebone Black?
 
