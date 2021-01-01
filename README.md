@@ -4,7 +4,7 @@
 
 ## Concepts:
 
-* What is a memory map? (1 minute read)
+* [What is a memory map?](docs/memory_map.md) (1 minute read)
 * What is program counter? (1 minute read)
 * What is an interrupt? (1 minute read)
 * How does a programmer control the peripherals (2 min read)?
