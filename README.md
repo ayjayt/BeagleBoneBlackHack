@@ -8,7 +8,7 @@
 * [What is program counter?](docs/program_counter.md) (1 minute read)
 * [What is an interrupt?](docs/interrupt.md) (2 minute read)
 * [How does a programmer control the peripherals](docs/peripherals.md) (4 min read)?
-* [What is privileged execution](docs/privilege.jpg) (4 min read)?
+* [What is privileged execution](docs/privilege.html) (4 min read)?
 
 ## TODO:
 
