@@ -1,6 +1,6 @@
 # What is a Memory Map?
 
-A memory map describes the Physical, Silicon Addresses on a microchip! You can only access these if you're doing baremetal or kernel programming. All other programs are given a Virtual Memory Map with nothing dangerous! The real memory map can usually be found in the chips "Technical Reference Manual" and usually looks like this:
+A **memory map** describes the **Physical, Silicon Addresses** on a microchip! You can only access these if you're doing baremetal or kernel programming. All other programs are given a **Virtual Memory Map** with nothing dangerous! The real memory map can usually be found in the chips "Technical Reference Manual" and usually looks like this:
 
 ![](memorymap.jpg)
 

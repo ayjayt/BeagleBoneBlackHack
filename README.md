@@ -6,7 +6,7 @@
 
 * [What is a memory map?](docs/memory_map.md) (1 minute read)
 * [What is program counter?](docs/program_counter.md) (1 minute read)
-* What is an interrupt? (1 minute read)
+* [What is an interrupt?](docs/interrupt.md) (1 minute read)
 * How does a programmer control the peripherals (2 min read)?
 * What is privileged execution (2 min read)?
 
