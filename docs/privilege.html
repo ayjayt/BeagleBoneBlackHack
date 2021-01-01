@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="what-is-privileged-execution">What is privileged execution?</h1>
+<p>Privileged execution is the default state- access to everything. But you can go into a de-privileged mode to make things safer.</p>
+<p>THIS IS THE BIG KAHUNA!!! Lets tie it all together.</p>
+<ol style="list-style-type: decimal">
+<li>The processor turns on, and (eventually, after the bootloader gets some basic stuff working) starts the kernel- which has privileged access (full access).</li>
+<li>The kernel builds all the data-structures (file system, scheduler, etc) and starts the drivers.</li>
+<li>The kernel and drivers together take this complicated and tedious &quot;pretending to be memory&quot; system used to control the processor (the previous post) and wrap it in nice APIs.</li>
+<li>Now the kernel wants to start process #1, aka PID 1, and on most linux systems, this is systemd (which starts everything else like your bash logins and desktops). However, it does not want to give systemd direct access to any PHYSICAL MEMORY. Only the kernel and the drivers can do that.</li>
+<li>So, what it does for PID 1 (and every other program): It loads the program into RAM and remembers the physical address where it loaded (lets say 0x6000,0000).</li>
+<li>It sets a MMU w/ a virtual memory map, to pretend that the memory map starts at 0x6000,0000.... that is it makes 0x6000,0000 look like 0x0. That way the program's whole virtual memory map... is just the section of RAM the kernel gave it!</li>
+<li>It puts the processor in de-privileged mode.</li>
+<li>It jumps to the _start() function of the program (a built in function that calls the main() you write).... and runs the program!</li>
+<li>How does it get out of de-privilege mode? It uses an interrupt like a hardware timer or SVC assembly instruction (any program can call SVC). The special thing about interrupts is that they are ALWAYS run in privileged mode. This is how the kernel takes back control from a program in de-privileged mode.</li>
+</ol>
+<p>That's why we say the kernel and drivers run in <strong>KERNEL SPACE</strong> and the programs run in <strong>USER SPACE</strong>.</p>
+<p>...and we will be breaking all these rules.</p>
+<p>Next up we'll talk about the file system, then device tree, and then we'll start the hacking.</p>
+<p>The image below shows an example state machine and memory map:</p>
+<div class="figure">
+<img src="privilege.jpg" />
+
+</div>
+</body>
+</html>

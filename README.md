@@ -6,13 +6,15 @@
 
 * [What is a memory map?](docs/memory_map.md) (1 minute read)
 * [What is program counter?](docs/program_counter.md) (1 minute read)
-* [What is an interrupt?](docs/interrupt.md) (1 minute read)
-* [How does a programmer control the peripherals](docs/peripherals.md) (2 min read)?
-* What is privileged execution (2 min read)?
+* [What is an interrupt?](docs/interrupt.md) (2 minute read)
+* [How does a programmer control the peripherals](docs/peripherals.md) (4 min read)?
+* [What is privileged execution](docs/privilege.jpg) (4 min read)?
 
 ## TODO:
 
-* Place for questions
+* Place for questions (issues in MD, e-mail form on HTML)
+* Breadcrumb on HTML
+* CSS on HTML
 * GPU
 * Quiz
 * Device Tree
