@@ -1,44 +1,76 @@
-<h1>Controlling the Processor (and Peripherals)</h1>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+<h1 id="controlling-the-processor-and-peripherals">Controlling the Processor (and Peripherals)</h1>
 <p>So we know that the program counter (which stores a memory address) always has an initial value during power-on and that's how we know where the first line of code will be run is. The first instruction always has COMPLETE ACCESS to EVERY memory address on the memory map! Full control! Full privilege! But wait...</p>
-
-<p>Did you already know that the features and peripherals on the processor PRETEND to be memory? Sure, some of the memory map is things like RAM, SRAM, NAND Flash- actual memory- but some parts of the memory map are other things only pretending to be memory- like the clock controller, GPIOs, PWMs, encryption accelerators, etc. Each "peripheral" has a little block of the memory map where it pretends to be memory, but actually it's using those addresses to communicate with the programmer.</p>
-
+<p>Did you already know that the features and peripherals on the processor PRETEND to be memory? Sure, some of the memory map is things like RAM, SRAM, NAND Flash- actual memory- but some parts of the memory map are other things only pretending to be memory- like the clock controller, GPIOs, PWMs, encryption accelerators, etc. Each &quot;peripheral&quot; has a little block of the memory map where it pretends to be memory, but actually it's using those addresses to communicate with the programmer.</p>
 <p>For example, the GPIOs might own addresses 0x4000000-0x40001000. Maybe the programmer writes all binary 1's to 0x40000000, and that's how the processor knows to turn the GPIOs to HIGH. The programmer then writes all 0s there, and that's how the processor knows to turn that to LOW. It's all in the technical reference manual! Maybe the processor READS memory address 0x40000004, and that stores which inputs are HIGH and and LOW at the moment it's read!</p>
-
 <p>So how does a programmer access these PHYSICAL memory address? Well, A) unless you're writing OS-level code, you CAN'T. Not even root! (without our special hacks 😏 ). But, if you are writing OS-level code, it looks like this:</p>
-
-<h1>Examples:</h1>
-
-<h2>In Assembly</h2>
-
-<p>("Registers" <code>R0-13</code> are super-fast pre-named variables that assembly programmers have to work with. It's not much.)</p>
-
-<p><code>arm
-MOV R0, #0x40000000 ; store the value 0x40000000 in Register R0 (# just means number)
+<h1 id="examples">Examples:</h1>
+<h2 id="in-assembly">In Assembly</h2>
+<p>(&quot;Registers&quot; <code>R0-13</code> are super-fast pre-named variables that assembly programmers have to work with. It's not much.)</p>
+<pre class="arm"><code>MOV R0, #0x40000000 ; store the value 0x40000000 in Register R0 (# just means number)
 MOV R1, #0x40000004 ; store the value 0x40000004 in Register R1 (# just means number)
 LDR R2, [R0] ; Treat R0 like an address (square brackets), and get the value there and put it in R2
-STR R2, [R1] ; Now store R2 into the address at R1.
-</code>
-What we just did is copy the value at address R0 to R1. The important thing is that we're specifying the memory addresses exactly.</p>
-
-<h2>In C</h2>
-
+STR R2, [R1] ; Now store R2 into the address at R1.</code></pre>
+<p>What we just did is copy the value at address R0 to R1. The important thing is that we're specifying the memory addresses exactly.</p>
+<h2 id="in-c">In C</h2>
 <p>(the examples are a little different...)</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="co">// Here we create a pointer (something that stores a memory address) and</span>
+<span class="co">// we tell it EXACTLY what memory address to point to (0x40000000).</span>
+<span class="dt">uint8_t</span> *pointerToPhysicalMemory = <span class="bn">0x40000000</span>;
 
-<p>```C
-// Here we create a pointer (something that stores a memory address) and
-// we tell it EXACTLY what memory address to point to (0x40000000).
-uint8_t *pointerToPhysicalMemory = 0x40000000;</p>
+<span class="co">// Now we store a binary value directly to that memory address (0x40000000).</span>
+*pointerToPhysicalMemory = <span class="dv">255</span>;
 
-<p>// Now we store a binary value directly to that memory address (0x40000000).
-*pointerToPhysicalMemory = 255;</p>
-
-<p>// Now we read the value from that memory address.
-uint8_t myVar = *pointerToPhysicalMemory;
-<code>``
-</code>myVar<code>might not be</code>255`!</p>
-
+<span class="co">// Now we read the value from that memory address.</span>
+<span class="dt">uint8_t</span> myVar = *pointerToPhysicalMemory;</code></pre></div>
+<p><code>myVar</code> might not be <code>255</code>!</p>
 <p>These addresses aren't really memory, just pretending to be memory! You have to read the datasheet!</p>
-
 <p>For all we know, <code>0x40000000</code> is the address of a hardware random number generator, it might change each time you read it!</p>
+</body>
+</html>

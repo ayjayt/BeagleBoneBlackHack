@@ -1,11 +1,21 @@
-<h1>What is a program counter?</h1>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="what-is-a-program-counter">What is a program counter?</h1>
 <p>The <strong>Program Counter</strong> is a bit of memory INSIDE the main processor that holds the exact line number that is being executed. The program counter is usually incremented as that bit of code is finished, but can be made to jump (to call a function), and forcibly overwritten by a hardware interrupt. It MUST hold the address of memory that is executable (or else crash)!</p>
-
 <p>On the BBB, this means it must point to the on-chip ROM (factory program code, read-only), external RAM, on-chip SRAM, or external NOR Flash (BBB has none).</p>
-
 <p>Generally, LOTS of memory addresses are not executable. Even if you can store code in certain memory addresses, that doesn't mean the memory address is executable. On the BBB (Sitara AM3358 chip), everything can be executed.... DOESN'T MEAN ITS A GOOD IDEA!</p>
+<div class="figure">
+<img src="programcounter.jpg" />
 
-<p><img src="programcounter.jpg" alt="" title="" /></p>
-
+</div>
 <p>Linux always copies programs into RAM to execute them! Small chips (like Arm Cortex-M0s, arduions) have non-volatile flash memory and the processor can execute that memory directly.</p>
+</body>
+</html>

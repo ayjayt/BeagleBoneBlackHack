@@ -37,6 +37,7 @@ uint8_t *pointerToPhysicalMemory = 0x40000000;
 // Now we read the value from that memory address.
 uint8_t myVar = *pointerToPhysicalMemory;
 ```
+
 `myVar` might not be `255`!
 
 These addresses aren't really memory, just pretending to be memory! You have to read the datasheet!

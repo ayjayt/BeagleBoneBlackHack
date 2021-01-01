@@ -1,7 +1,19 @@
-<h1>What is a Memory Map?</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="what-is-a-memory-map">What is a Memory Map?</h1>
+<p>A <strong>memory map</strong> describes the <strong>Physical, Silicon Addresses</strong> on a microchip! You can only access these if you're doing baremetal or kernel programming. All other programs are given a <strong>Virtual Memory Map</strong> with nothing dangerous! The real memory map can usually be found in the chips &quot;Technical Reference Manual&quot; and usually looks like this:</p>
+<div class="figure">
+<img src="memorymap.jpg" />
 
-<p>A <strong>memory map</strong> describes the <strong>Physical, Silicon Addresses</strong> on a microchip! You can only access these if you're doing baremetal or kernel programming. All other programs are given a <strong>Virtual Memory Map</strong> with nothing dangerous! The real memory map can usually be found in the chips "Technical Reference Manual" and usually looks like this:</p>
-
-<p><img src="memorymap.jpg" alt="" title="" /></p>
-
+</div>
 <p>This isn't the Beaglebone's memory map! It's just an example. The Beaglebone Black uses a Sitara AM335x Arm Cortex-A8 chip from Texas Instruments and its memory map is HUGE. The Technical Reference Manual is thousands of pages long. The Beaglebone Black is one of the only single board computers where the vendor gives you the Technical Reference manual- most are closed source!</p>
+</body>
+</html>
