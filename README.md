@@ -1,0 +1,31 @@
+# BeagleBoneBlack Hacks
+
+**BeagleBoneBlack Hacks** is an extremely tiny course (30 minutes) on some extremely advanced embedded linux hacking. Below you'll find a list of bite-sized concepts to read as a prerequisite. You can ask questions in the [issues](https://github.com/ayjayt/BeagleBoneBlackHack/issues) or at our [facebook group](https://www.facebook.com/groups/beagleboneblack/).
+
+## Concepts:
+
+* What is a memory map? (1 minute read)
+* What is program counter? (1 minute read)
+* What is an interrupt? (1 minute read)
+* How does a programmer control the peripherals (2 min read)?
+* What is privileged execution (2 min read)?
+
+## TODO:
+
+* Quiz
+* Device Tree
+* File System
+* PY-UIO
+* E-mail system
+
+### Why do we use the Beaglebone Black?
+
+ Because TI publishes the entire technical reference manual for the device and except for the GPU section, everything is open source. This way, the BBB is the BEST learning tool for deep hacking.
+
+### What is the final goal of this project?
+
+To break things for no reason! (without really breaking anything)
+
+### Isn't it going to do a cool light show, or control a sprinkler, or something at the end?
+
+NO! We're just HACKING IT. If you want to make a project that does something specific, it's up to you.
