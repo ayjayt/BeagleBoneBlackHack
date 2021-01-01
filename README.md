@@ -17,6 +17,7 @@
 * File System
 * PY-UIO
 * E-mail system
+* GPU
 
 ### Why do we use the Beaglebone Black?
 
