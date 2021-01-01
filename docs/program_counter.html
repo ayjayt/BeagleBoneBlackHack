@@ -1,7 +1,11 @@
-<h1>What is a Memory Map?</h1>
+<h1>What is a program counter?</h1>
 
-<p>A memory map describes the Physical, Silicon Addresses on a microchip! You can only access these if you're doing baremetal or kernel programming. All other programs are given a Virtual Memory Map with nothing dangerous! The real memory map can usually be found in the chips "Technical Reference Manual" and usually looks like this:</p>
+<p>The <strong>Program Counter</strong> is a bit of memory INSIDE the main processor that holds the exact line number that is being executed. The program counter is usually incremented as that bit of code is finished, but can be made to jump (to call a function), and forcibly overwritten by a hardware interrupt. It MUST hold the address of memory that is executable (or else crash)!</p>
 
-<p><img src="memorymap.jpg" alt="" title="" /></p>
+<p>On the BBB, this means it must point to the on-chip ROM (factory program code, read-only), external RAM, on-chip SRAM, or external NOR Flash (BBB has none).</p>
 
-<p>This isn't the Beaglebone's memory map! It's just an example. The Beaglebone Black uses a Sitara AM335x Arm Cortex-A8 chip from Texas Instruments and its memory map is HUGE. The Technical Reference Manual is thousands of pages long. The Beaglebone Black is one of the only single board computers where the vendor gives you the Technical Reference manual- most are closed source!</p>
+<p>Generally, LOTS of memory addresses are not executable. Even if you can store code in certain memory addresses, that doesn't mean the memory address is executable. On the BBB (Sitara AM3358 chip), everything can be executed.... DOESN'T MEAN ITS A GOOD IDEA!</p>
+
+<p><img src="programcounter.jpg" alt="" title="" /></p>
+
+<p>Linux always copies programs into RAM to execute them! Small chips (like Arm Cortex-M0s, arduions) have non-volatile flash memory and the processor can execute that memory directly.</p>
